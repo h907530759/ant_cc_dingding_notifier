@@ -2,14 +2,15 @@
 
 import subprocess
 import sys
+import shutil
 from typing import Dict, Any
 
 
 class MacOSNotifier:
     """macOS 系统通知器
 
-    使用 osascript 调用 macOS NotificationCenter 发送系统通知
-    零外部依赖，使用系统自带功能
+    使用 terminal-notifier 发送系统通知
+    需要安装: brew install terminal-notifier
     """
 
     def __init__(self, enabled: bool = True, sound: bool = True):
@@ -21,6 +22,15 @@ class MacOSNotifier:
         """
         self.enabled = enabled
         self.sound = sound
+        self._check_terminal_notifier()
+
+    def _check_terminal_notifier(self) -> bool:
+        """检查 terminal-notifier 是否已安装
+
+        Returns:
+            bool: 是否已安装
+        """
+        return shutil.which("terminal-notifier") is not None
 
     def send(self, title: str, message: str) -> bool:
         """发送 macOS 系统通知
@@ -35,22 +45,39 @@ class MacOSNotifier:
         if not self.enabled:
             return False
 
-        # 转义引号和反斜杠
-        title_escaped = title.replace('"', '\\"').replace('\\', '\\\\')
-        message_escaped = message.replace('"', '\\"').replace('\\', '\\\\')
-
-        # 构建 AppleScript
-        sound_option = 'sound name "default"' if self.sound else ''
-
-        script = f'''display notification "{message_escaped}" with title "{title_escaped}" {sound_option}'''
+        # 检查 terminal-notifier 是否安装
+        if not self._check_terminal_notifier():
+            print(
+                "Warning: terminal-notifier not found. Install with: brew install terminal-notifier",
+                file=sys.stderr
+            )
+            return False
 
         try:
-            subprocess.run(
-                ["osascript", "-e", script],
-                capture_output=True,
-                text=True,
+            # 构建 terminal-notifier 命令
+            cmd = [
+                "terminal-notifier",
+                "-title", title,
+                "-message", message,
+                "-sender", "com.apple.Terminal"  # 指定发送者
+            ]
+
+            # 添加声音选项
+            if self.sound:
+                cmd.extend(["-sound", "default"])
+
+            # 不捕获输出，让错误信息可见
+            result = subprocess.run(
+                cmd,
+                capture_output=False,
                 check=False
             )
+
+            # 检查返回码
+            if result.returncode != 0:
+                print(f"terminal-notifier returned code: {result.returncode}", file=sys.stderr)
+                return False
+
             return True
         except Exception as e:
             # macOS 通知失败不应该影响钉钉通知

@@ -56,11 +56,12 @@ claude-dingtalk setup
 
 ### macOS 桌面通知
 
-- ✅ 零依赖，使用系统自带功能
+- ✅ 使用 terminal-notifier，兼容所有终端工具（iTerm2、Terminal 等）
 - ✅ 与钉钉通知同时发送
 - ✅ 简洁的通知标题和内容
+- 📦 **需要安装**: `brew install terminal-notifier`
 - 📖 **[macOS 通知使用说明](MACOS_NOTIFICATION_v0.3.0.md)**
-- 🔧 **[macOS 通知故障排除](MACOS_TROUBLESHOOTING.md)** - 通知没弹出？90%是权限问题
+- 🔧 **[macOS 通知故障排除](MACOS_TROUBLESHOOTING.md)** - 通知没弹出？查看安装步骤
 
 ## 🎯 核心功能
 

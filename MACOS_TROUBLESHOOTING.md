@@ -44,13 +44,23 @@ open "x-apple.systempreferences:com.apple.preference.notifications"
 ✅ 声音: 默认                    ← 可选
 ```
 
-#### 步骤 4: 测试通知
+#### 步骤 4: 安装 terminal-notifier
+
+```bash
+# 检查是否已安装
+which terminal-notifier
+
+# 如果未安装，使用 Homebrew 安装
+brew install terminal-notifier
+```
+
+#### 步骤 5: 测试通知
 
 ```bash
 # 测试是否能弹出通知
-osascript -e 'display notification "测试消息" with title "测试标题" sound name "default"'
+terminal-notifier -title "测试标题" -message "测试消息" -sound default
 
-# 如果成功弹出，说明权限问题已解决
+# 如果成功弹出，说明安装成功
 ```
 
 ---
@@ -250,7 +260,7 @@ cdn hooks install
 - 两个渠道互不干扰
 
 **可能原因**：
-1. osascript 执行失败（极少见）
+1. terminal-notifier 未安装
 2. 系统资源不足
 3. Hook 脚本异常退出
 
@@ -267,7 +277,9 @@ result = notifier.send('手动测试', '测试通知')
 print(f'发送结果: {result}')
 "
 
-# 如果返回 False 或报错，说明有问题
+# 如果返回 False，检查 terminal-notifier 是否已安装
+which terminal-notifier
+
 # 如果返回 True 但没看到通知，检查系统设置
 ```
 
@@ -340,14 +352,19 @@ echo '{"cwd":"~/test"}' | python3 ~/.claude-dingtalk/hooks/session_start.py
 # 如果有 ImportError，说明 Python 路径配置有问题
 ```
 
-### 诊断 2: 测试 osascript
+### 诊断 2: 测试 terminal-notifier
 
 ```bash
-# 直接测试 osascript
-osascript -e 'display notification "测试消息" with title "测试标题" sound name "default"'
+# 直接测试 terminal-notifier
+terminal-notifier -title "测试标题" -message "测试消息" -sound default
 
-# 如果这条命令都不工作，说明是系统问题
-# 可能需要重启 macOS 通知服务
+# 如果这条命令不工作，检查是否已安装
+which terminal-notifier
+
+# 如果未安装，执行安装
+brew install terminal-notifier
+
+# 安装后重新测试
 ```
 
 ### 诊断 3: 重启通知服务
@@ -385,7 +402,11 @@ macOS 通知没有弹出
          ↓
    YES → 关闭请勿打扰
          ↓
-   NO → [手动测试是否成功?]
+   NO → [terminal-notifier 是否安装?]
+         ↓
+   NO → 运行 brew install terminal-notifier
+         ↓
+   YES → [手动测试是否成功?]
          ↓
    NO → 重载通知中心
          ↓
@@ -414,7 +435,7 @@ cdn hooks status
 echo '{"cwd":"~/test"}' | python3 ~/.claude-dingtalk/hooks/session_start.py 2>&1
 
 # 5. 系统通知测试
-osascript -e 'display notification "测试" with title "测试"'
+terminal-notifier -title "测试" -message "测试消息"
 ```
 
 ### 常见错误信息及含义
@@ -423,7 +444,7 @@ osascript -e 'display notification "测试" with title "测试"'
 |---------|------|---------|
 | `Warning: Could not import claude_dingtalk_notifier` | Python 路径配置错误 | 重新运行 `./install.sh` |
 | `NameError: name 'MacOSNotifier' is not defined` | Hook 脚本未更新 | 运行 `cdn hooks install` |
-| `command not found: osascript` | macOS 系统问题（极罕见） | 重启系统或更新 macOS |
+| `Warning: terminal-notifier not found` | 未安装 terminal-notifier | 运行 `brew install terminal-notifier` |
 | 没有错误但也没通知 | 权限或配置问题 | 检查系统设置中的通知权限 |
 
 ---

@@ -92,6 +92,18 @@ pipx install .
 
 ## 快速开始
 
+0. **安装 macOS 通知依赖（可选）**
+
+如果需要使用 macOS 桌面通知功能，需要先安装 terminal-notifier：
+
+```bash
+# 使用 Homebrew 安装
+brew install terminal-notifier
+
+# 验证安装
+terminal-notifier -title "测试" -message "安装成功"
+```
+
 1. **配置工具**
 
 ```bash
@@ -103,6 +115,7 @@ pipx install .
 - 加签密钥（可选）
 - 选择要启用的事件
 - 配置文件路径
+- 是否启用 macOS 桌面通知
 
 2. **测试通知**
 
@@ -133,7 +146,11 @@ source ~/.zshrc  # 或 source ~/.bashrc
 
 **A:** 手动安装依赖：
 ```bash
+# Python 依赖
 pip3 install --user requests pyyaml click rich
+
+# macOS 通知依赖（如果需要桌面通知）
+brew install terminal-notifier
 ```
 
 ## 卸载
