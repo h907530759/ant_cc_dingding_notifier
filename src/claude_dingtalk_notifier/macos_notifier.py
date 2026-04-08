@@ -13,15 +13,17 @@ class MacOSNotifier:
     需要安装: brew install terminal-notifier
     """
 
-    def __init__(self, enabled: bool = True, sound: bool = True):
+    def __init__(self, enabled: bool = True, sound: bool = True, logger=None):
         """初始化 macOS 通知器
 
         Args:
             enabled: 是否启用通知
             sound: 是否播放声音
+            logger: 可选的日志记录器
         """
         self.enabled = enabled
         self.sound = sound
+        self.logger = logger
         self._check_terminal_notifier()
 
     def _check_terminal_notifier(self) -> bool:
@@ -43,14 +45,17 @@ class MacOSNotifier:
             bool: 是否发送成功
         """
         if not self.enabled:
+            if self.logger:
+                self.logger.debug("macOS notification disabled, skipping")
             return False
 
         # 检查 terminal-notifier 是否安装
         if not self._check_terminal_notifier():
-            print(
-                "Warning: terminal-notifier not found. Install with: brew install terminal-notifier",
-                file=sys.stderr
-            )
+            error_msg = "terminal-notifier not found. Install with: brew install terminal-notifier"
+            if self.logger:
+                self.logger.log_channel_failure("macOS-notifier", error_msg)
+            else:
+                print(f"Warning: {error_msg}", file=sys.stderr)
             return False
 
         try:
@@ -73,15 +78,26 @@ class MacOSNotifier:
                 check=False
             )
 
-            # 检查返回码
+            # 检查返回码并记录日志
             if result.returncode != 0:
-                print(f"terminal-notifier returned code: {result.returncode}", file=sys.stderr)
+                error_msg = f"terminal-notifier returned code: {result.returncode}"
+                if self.logger:
+                    self.logger.log_channel_failure("macOS-notifier", error_msg)
+                else:
+                    print(f"Warning: {error_msg}", file=sys.stderr)
                 return False
+
+            if self.logger:
+                self.logger.log_channel_success("macOS-notifier", f"Notification sent: {title}")
 
             return True
         except Exception as e:
             # macOS 通知失败不应该影响钉钉通知
-            print(f"macOS notification failed: {e}", file=sys.stderr)
+            error_msg = f"macOS notification failed: {e}"
+            if self.logger:
+                self.logger.log_channel_failure("macOS-notifier", error_msg)
+            else:
+                print(f"Warning: {error_msg}", file=sys.stderr)
             return False
 
     def test(self) -> Dict[str, Any]:

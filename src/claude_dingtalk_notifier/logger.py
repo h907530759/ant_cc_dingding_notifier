@@ -85,6 +85,21 @@ class HookLogger:
                 f"Status: {status_code}, Response: {response}"
             )
 
+    def log_channel_trigger(self, hook_name: str, channel: str):
+        """Log when a notification channel is triggered"""
+        self._logger.info(f"Channel triggered: {channel} ({hook_name})")
+
+    def log_channel_success(self, channel: str, message: str = ""):
+        """Log successful channel execution"""
+        if message:
+            self._logger.info(f"✓ {channel}: SUCCESS - {message}")
+        else:
+            self._logger.info(f"✓ {channel}: SUCCESS")
+
+    def log_channel_failure(self, channel: str, error: str):
+        """Log failed channel execution"""
+        self._logger.error(f"✗ {channel}: FAILED - {error}")
+
     def log_import_error(self, hook_name: str, error: ImportError):
         """Log import error"""
         self._logger.error(

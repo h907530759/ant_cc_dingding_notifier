@@ -751,6 +751,7 @@ def main():
 
         # Send DingTalk notification
         if config.dingtalk.enabled:
+            logger.log_channel_trigger(hook_name, "dingtalk")
             notifier = DingTalkNotifier(
                 webhook=config.dingtalk.webhook,
                 secret=config.dingtalk.secret,
@@ -767,19 +768,21 @@ def main():
                 result = notifier.send(message)
 
                 if result.get("success"):
-                    logger.log_hook_success(hook_name, "Notification sent successfully")
+                    logger.log_hook_success(hook_name, "All notifications sent successfully")
                 else:
                     logger.log_hook_error(
                         hook_name,
                         Exception(result.get("error", "Unknown error")),
-                        "Failed to send notification"
+                        "Failed to send DingTalk notification"
                     )
 
         # Send macOS notification
         if config.macos.enabled:
+            logger.log_channel_trigger(hook_name, "macOS-notifier")
             macos_notifier = MacOSNotifier(
                 enabled=config.macos.enabled,
-                sound=config.macos.sound
+                sound=config.macos.sound,
+                logger=logger
             )
             project_name = Path(project).name if project != "Unknown" else project
             macos_notifier.send(

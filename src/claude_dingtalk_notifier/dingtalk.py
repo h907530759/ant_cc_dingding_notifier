@@ -119,18 +119,13 @@ class DingTalkNotifier:
 
             if result.get("errcode") == 0:
                 if self.logger:
-                    self.logger.log_dingtalk_response(
-                        success=True,
-                        status_code=response.status_code,
-                        response=result
-                    )
+                    self.logger.log_channel_success("dingtalk", f"Notification sent successfully")
                 return {"success": True, "data": result}
             else:
                 if self.logger:
-                    self.logger.log_dingtalk_response(
-                        success=False,
-                        status_code=response.status_code,
-                        response=result
+                    self.logger.log_channel_failure(
+                        "dingtalk",
+                        f"errcode={result.get('errcode')}, errmsg={result.get('errmsg', 'Unknown error')}"
                     )
                 return {
                     "success": False,
@@ -140,15 +135,15 @@ class DingTalkNotifier:
 
         except requests.exceptions.Timeout:
             if self.logger:
-                self.logger.error("DingTalk request timeout")
+                self.logger.log_channel_failure("dingtalk", "Request timeout")
             return {"success": False, "error": "Request timeout"}
         except requests.exceptions.RequestException as e:
             if self.logger:
-                self.logger.error(f"DingTalk request failed: {str(e)}")
+                self.logger.log_channel_failure("dingtalk", f"Request failed: {str(e)}")
             return {"success": False, "error": str(e)}
         except Exception as e:
             if self.logger:
-                self.logger.error(f"DingTalk unexpected error: {str(e)}")
+                self.logger.log_channel_failure("dingtalk", f"Unexpected error: {str(e)}")
             return {"success": False, "error": str(e)}
 
     def send_markdown(self, title: str, text: str) -> Dict[str, Any]:
