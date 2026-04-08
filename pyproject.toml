@@ -1,0 +1,34 @@
+[project]
+name = "claude-dingtalk-notifier"
+version = "0.3.1"
+description = "Claude Code DingTalk notification integration"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "requests>=2.31.0",
+    "pyyaml>=6.0.0",
+    "click>=8.1.0",
+    "rich>=13.0.0",
+]
+authors = [
+    {name = "suchen", email = "suchen@example.com"}
+]
+license = {text = "MIT"}
+
+[project.scripts]
+claude-dingtalk = "claude_dingtalk_notifier.cli:main"
+cdn = "claude_dingtalk_notifier.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/suchen/claude-dingtalk-notifier"
+Issues = "https://github.com/suchen/claude-dingtalk-notifier/issues"
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-dir]
+"" = "src"
