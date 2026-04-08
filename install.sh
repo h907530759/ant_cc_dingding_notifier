@@ -165,7 +165,7 @@ WRAPPER
     
     # 创建长命令名
     cat > "$bin_dir/claude-dingtalk" << WRAPPER
-#!/bin/bash"
+#!/bin/bash
 exec "$bin_dir/cdn" "\$@"
 WRAPPER
     chmod +x "$bin_dir/claude-dingtalk"
