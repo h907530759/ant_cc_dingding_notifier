@@ -49,6 +49,7 @@ claude-dingtalk setup
 
 - **[INSTALL.md](INSTALL.md)** - 安装指南
 - **[QUICKSTART.md](QUICKSTART.md)** - 5 分钟快速配置
+- **[UPGRADE_GUIDE.md](UPGRADE_GUIDE.md)** - 升级指南
 - **[docs/USAGE.md](docs/USAGE.md)** - 完整使用指南
 - **[PROJECT_SUMMARY.md](PROJECT_SUMMARY.md)** - 项目总结
 - **[MACOS_TROUBLESHOOTING.md](MACOS_TROUBLESHOOTING.md)** - macOS 通知故障排除（⭐ 推荐）
