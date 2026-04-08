@@ -501,8 +501,34 @@ def hooks_install():
         for hook_name in hooks_to_remove:
             del settings_data["hooks"][hook_name]
 
-        # Add new hooks in correct format
-        settings_data["hooks"].update(enabled_hooks)
+        # Merge hooks instead of overwriting
+        for hook_name, hook_configs in enabled_hooks.items():
+            if hook_name in settings_data["hooks"]:
+                # Hook already exists: merge with existing hooks
+                existing = settings_data["hooks"][hook_name]
+                if isinstance(existing, list):
+                    # Check if our hook already exists to avoid duplicates
+                    our_hook_path = str(hook_dir / f"{hook_name.lower()}.py")
+                    already_exists = any(
+                        any(
+                            h.get("command", "") == our_hook_path
+                            for h in item.get("hooks", [])
+                        )
+                        for item in existing
+                        if isinstance(item, dict)
+                    )
+
+                    if not already_exists:
+                        # Append our hooks to the existing array
+                        # This allows multiple applications' hooks to coexist
+                        settings_data["hooks"][hook_name].extend(hook_configs)
+                    # else: our hook already exists, skip adding
+                else:
+                    # Old format, replace with new format
+                    settings_data["hooks"][hook_name] = hook_configs
+            else:
+                # Hook doesn't exist: add it
+                settings_data["hooks"][hook_name] = hook_configs
 
         # Backup and save
         backup_path = settings_path.with_suffix('.json.backup')
