@@ -20,8 +20,8 @@ claude-dingtalk = "claude_dingtalk_notifier.cli:main"
 cdn = "claude_dingtalk_notifier.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/suchen/claude-dingtalk-notifier"
-Issues = "https://github.com/suchen/claude-dingtalk-notifier/issues"
+Homepage = "https://github.com/h907530759/ant_cc_dingding_notifier"
+Issues = "https://github.com/h907530759/ant_cc_dingding_notifier/issues"
 
 [build-system]
 requires = ["setuptools>=61.0", "wheel"]
