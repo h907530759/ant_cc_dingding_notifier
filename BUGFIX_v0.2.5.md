@@ -34,7 +34,7 @@
 ```python
 # Stop hook 只传递 cwd 字段
 {
-    "cwd": "/Users/suchen/workspace/claude_notifyer"
+    "cwd": "~/ant_cc_dingding_notifier"
 }
 ```
 

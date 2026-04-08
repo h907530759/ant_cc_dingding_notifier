@@ -28,13 +28,13 @@ del settings_data["hooks"]  # 删除所有 hooks！
         "matcher": "WebSearch",
         "hooks": [{
           "type": "command",
-          "command": "/Users/suchen/.codefuse/fuse/engine/hooks/mac-arm64/cfuse-hook-cli cc_PreToolUse"
+          "command": "~/.codefuse/fuse/engine/hooks/mac-arm64/cfuse-hook-cli cc_PreToolUse"
         }]
       },
       {
         "hooks": [{
           "type": "command",
-          "command": "/Users/suchen/.claude-dingtalk/hooks/pre_tool_use.py"
+          "command": "~/.claude-dingtalk/hooks/pre_tool_use.py"
         }]
       }
     ]
@@ -71,10 +71,10 @@ del settings_data["hooks"]  # 删除所有 hooks！
 ```bash
 $ cdn hooks uninstall
 
-处理配置文件: /Users/suchen/.claude/settings.json
+处理配置文件: ~/.claude/settings.json
   ✓ 已删除 7 个 claude-dingtalk hooks (保留其他应用的 hooks)
 
-处理配置文件: /Users/suchen/.codefuse/engine/cc/settings.json
+处理配置文件: ~/.claude/settings.json
   ✓ 已删除 7 个 claude-dingtalk hooks (保留其他应用的 hooks)
 ```
 
@@ -94,7 +94,7 @@ $ cdn hooks uninstall
 ```bash
 $ cdn hooks remove PreToolUse
 
-处理配置文件: /Users/suchen/.claude/settings.json
+处理配置文件: ~/.claude/settings.json
   ✓ Hook 已删除
 ```
 
@@ -107,7 +107,7 @@ $ cdn hooks remove PreToolUse
 ```bash
 $ cdn hooks remove PreToolUse
 
-处理配置文件: /Users/suchen/.codefuse/engine/cc/settings.json
+处理配置文件: ~/.claude/settings.json
   ✓ 已删除 claude-dingtalk 的 PreToolUse hook (保留其他应用的 hook)
 ```
 
@@ -216,7 +216,7 @@ cdn hooks status
 cdn hooks remove PreToolUse
 
 # 3. 验证 codefuse hooks 仍然存在
-cat ~/.codefuse/engine/cc/settings.json | grep -A 10 "PreToolUse"
+cat ~/.claude/settings.json | grep -A 10 "PreToolUse"
 ```
 
 **预期结果**：

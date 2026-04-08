@@ -11,7 +11,7 @@ dependencies = [
     "rich>=13.0.0",
 ]
 authors = [
-    {name = "suchen", email = "suchen@example.com"}
+    {name = "h907530759", email = "noreply@example.com"}
 ]
 license = {text = "MIT"}
 

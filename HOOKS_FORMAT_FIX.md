@@ -62,7 +62,7 @@
 sys.path.insert(0, str(Path(__file__).parent.parent))  # 指向 ~/.claude-dingtalk
 
 # 修复后
-package_path = Path(r"/Users/suchen/workspace/claude_notifyer/src")  # 正确指向 src 目录
+package_path = Path(r"~/ant_cc_dingding_notifier/src")  # 正确指向 src 目录
 if package_path.exists():
     sys.path.insert(0, str(package_path))
 
@@ -134,23 +134,23 @@ for hook_name, hook_config in enabled_hooks.items():
 
 ### 1. Hooks 安装测试
 ```bash
-$ PYTHONPATH=/Users/suchen/workspace/claude_notifyer/src python3 -m claude_dingtalk_notifier.cli hooks install
+$ PYTHONPATH=~/ant_cc_dingding_notifier/src python3 -m claude_dingtalk_notifier.cli hooks install
 
 🔧 安装 Claude Code Hooks
 
-处理配置文件: /Users/suchen/.claude/settings.json
+处理配置文件: ~/.claude/settings.json
   ✓ Hooks 已安装 (备份: settings.json.backup)
 
 ✅ Hooks 安装完成！
 
 已安装的 Hooks:
-  - PreToolUse: /Users/suchen/.claude-dingtalk/hooks/pre_tool_use.py
-  - PostToolUseFailure: /Users/suchen/.claude-dingtalk/hooks/tool_failure.py
-  - Stop: /Users/suchen/.claude-dingtalk/hooks/stop.py
-  - StopFailure: /Users/suchen/.claude-dingtalk/hooks/stop_failure.py
-  - Notification: /Users/suchen/.claude-dingtalk/hooks/notification.py
-  - SessionEnd: /Users/suchen/.claude-dingtalk/hooks/session_end.py
-  - TaskCompleted: /Users/suchen/.claude-dingtalk/hooks/task_completed.py
+  - PreToolUse: ~/.claude-dingtalk/hooks/pre_tool_use.py
+  - PostToolUseFailure: ~/.claude-dingtalk/hooks/tool_failure.py
+  - Stop: ~/.claude-dingtalk/hooks/stop.py
+  - StopFailure: ~/.claude-dingtalk/hooks/stop_failure.py
+  - Notification: ~/.claude-dingtalk/hooks/notification.py
+  - SessionEnd: ~/.claude-dingtalk/hooks/session_end.py
+  - TaskCompleted: ~/.claude-dingtalk/hooks/task_completed.py
 ```
 
 ### 2. 配置文件验证
@@ -171,7 +171,7 @@ Format check:
 
 ### 3. 通知测试
 ```bash
-$ PYTHONPATH=/Users/suchen/workspace/claude_notifyer/src python3 -m claude_dingtalk_notifier.cli test
+$ PYTHONPATH=~/ant_cc_dingding_notifier/src python3 -m claude_dingtalk_notifier.cli test
 
 🧪 测试钉钉通知
 
@@ -325,6 +325,6 @@ Claude Code 官方支持 **26 个 Hook**，当前实现支持 **14 个 Hook** (5
 ---
 
 **修复完成时间**: 2026-04-03
-**修复人员**: Claude + suchen
+**修复人员**: Claude
 **测试状态**: ✅ 通过
 **文档状态**: ✅ 已更新

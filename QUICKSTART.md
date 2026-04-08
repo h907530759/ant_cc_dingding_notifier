@@ -5,7 +5,7 @@
 ### 步骤 1: 进入项目目录
 
 ```bash
-cd /Users/suchen/workspace/claude_notifyer
+cd ~/ant_cc_dingding_notifier
 ```
 
 ### 步骤 2: 创建钉钉机器人
@@ -84,8 +84,8 @@ cd /Users/suchen/workspace/claude_notifyer
 
 ```bash
 # 添加到 ~/.zshrc 或 ~/.bashrc
-alias claude-dingtalk='/Users/suchen/workspace/claude_notifyer/run.sh'
-alias cdn='/Users/suchen/workspace/claude_notifyer/run.sh'
+alias claude-dingtalk='~/ant_cc_dingding_notifier/run.sh'
+alias cdn='~/ant_cc_dingding_notifier/run.sh'
 ```
 
 然后就可以使用简短命令：

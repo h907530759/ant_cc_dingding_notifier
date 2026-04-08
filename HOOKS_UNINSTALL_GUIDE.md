@@ -22,8 +22,8 @@ python -m claude_dingtalk_notifier.cli hooks uninstall
 ```
 请选择要卸载 Hooks 的配置文件:
 
-  1. /Users/suchen/.claude/settings.json
-  2. /Users/suchen/.codefuse/engine/cc/settings.json
+  1. ~/.claude/settings.json
+  2. ~/.claude/settings.json
   3. 所有文件
   0. 取消
 
@@ -38,7 +38,7 @@ python -m claude_dingtalk_notifier.cli hooks uninstall
 ### 方式 2: 指定单个文件
 
 ```bash
-python -m claude_dingtalk_notifier.cli hooks uninstall --settings /Users/suchen/.claude/settings.json
+python -m claude_dingtalk_notifier.cli hooks uninstall --settings ~/.claude/settings.json
 ```
 
 **效果**: 只从指定的 settings.json 中卸载 hooks
@@ -69,8 +69,8 @@ python -m claude_dingtalk_notifier.cli hooks remove PreToolUse
 ```
 请选择要删除 Hook 的配置文件:
 
-  1. /Users/suchen/.claude/settings.json
-  2. /Users/suchen/.codefuse/engine/cc/settings.json
+  1. ~/.claude/settings.json
+  2. ~/.claude/settings.json
   3. 所有文件
   0. 取消
 
@@ -86,10 +86,10 @@ python -m claude_dingtalk_notifier.cli hooks remove PreToolUse
 
 ```bash
 # 只从主配置中删除
-python -m claude_dingtalk_notifier.cli hooks remove PreToolUse --settings /Users/suchen/.claude/settings.json
+python -m claude_dingtalk_notifier.cli hooks remove PreToolUse --settings ~/.claude/settings.json
 
 # 只从工作配置中删除
-python -m claude_dingtalk_notifier.cli hooks remove PreToolUse --settings /Users/suchen/.codefuse/engine/cc/settings.json
+python -m claude_dingtalk_notifier.cli hooks remove PreToolUse --settings ~/.claude/settings.json
 ```
 
 **使用场景**:
@@ -122,7 +122,7 @@ python -m claude_dingtalk_notifier.cli hooks remove PreToolUse --settings ~/.cla
 
 **情况**: 有两个配置文件
 - `~/.claude/settings.json` - 个人开发
-- `/Users/suchen/.codefuse/engine/cc/settings.json` - 工作项目
+- `~/.claude/settings.json` - 工作项目
 
 **需求**: 只在工作项目中禁用 PreToolUse hook
 
@@ -133,7 +133,7 @@ python -m claude_dingtalk_notifier.cli hooks remove PreToolUse
 # 选择: 2 (工作项目)
 
 # 方式 2: 直接指定
-python -m claude_dingtalk_notifier.cli hooks remove PreToolUse --settings /Users/suchen/.codefuse/engine/cc/settings.json
+python -m claude_dingtalk_notifier.cli hooks remove PreToolUse --settings ~/.claude/settings.json
 ```
 
 ### 场景 2: 清理特定环境的所有 hooks
@@ -147,7 +147,7 @@ python -m claude_dingtalk_notifier.cli hooks uninstall
 # 选择: 2 (工作项目)
 
 # 方式 2: 直接指定
-python -m claude_dingtalk_notifier.cli hooks uninstall --settings /Users/suchen/.codefuse/engine/cc/settings.json
+python -m claude_dingtalk_notifier.cli hooks uninstall --settings ~/.claude/settings.json
 ```
 
 ### 场景 3: 测试不同的 hook 配置

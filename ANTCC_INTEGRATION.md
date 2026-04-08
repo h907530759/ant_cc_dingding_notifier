@@ -25,7 +25,7 @@ settings_paths: List[str] = field(default_factory=lambda: ["~/.claude/settings.j
 ```python
 settings_paths: List[str] = field(default_factory=lambda: [
     "~/.claude/settings.json",           # 开源 Claude Code
-    "~/.codefuse/engine/cc/settings.json"  # 内部 antcc 系统
+    "~/.claude/settings.json"  # 内部 antcc 系统
 ])
 ```
 
@@ -42,7 +42,7 @@ default_paths = [
 ```python
 default_paths = [
     "~/.claude/settings.json",           # 开源 Claude Code
-    "~/.codefuse/engine/cc/settings.json",  # 内部 antcc 系统
+    "~/.claude/settings.json",  # 内部 antcc 系统
 ]
 ```
 
@@ -58,8 +58,8 @@ default_paths = [
 $ cdn setup
 
 发现以下 Claude Code 配置文件:
-  1. /Users/suchen/.claude/settings.json
-  2. /Users/suchen/.codefuse/engine/cc/settings.json
+  1. ~/.claude/settings.json
+  2. ~/.claude/settings.json
 
 是否使用发现的配置文件？[Y/n]:
 ```
@@ -72,14 +72,14 @@ $ cdn setup
 $ cdn setup
 
 发现以下 Claude Code 配置文件:
-  1. /Users/suchen/.claude/settings.json
-  2. /Users/suchen/.codefuse/engine/cc/settings.json
+  1. ~/.claude/settings.json
+  2. ~/.claude/settings.json
 
 是否使用发现的配置文件？[Y/n]: Y  # 默认推荐使用所有找到的
 
 已配置的 settings.json 路径:
   1. ~/.claude/settings.json
-  2. ~/.codefuse/engine/cc/settings.json
+  2. ~/.claude/settings.json
 ```
 
 **改进**:
@@ -102,7 +102,7 @@ cat ~/.claude-dingtalk/config.yaml | grep -A 5 "settings_paths"
 ```yaml
 settings_paths:
   - ~/.claude/settings.json
-  - ~/.codefuse/engine/cc/settings.json
+  - ~/.claude/settings.json
 ```
 
 ### Hooks 安装
@@ -110,10 +110,10 @@ settings_paths:
 ```bash
 $ cdn hooks install
 
-处理配置文件: /Users/suchen/.claude/settings.json
+处理配置文件: ~/.claude/settings.json
   ✓ Hooks 已安装 (备份: settings.json.backup)
 
-处理配置文件: /Users/suchen/.codefuse/engine/cc/settings.json
+处理配置文件: ~/.claude/settings.json
   ✓ Hooks 已安装 (备份: settings.json.backup)
 
 ✅ Hooks 安装完成！
@@ -124,10 +124,10 @@ $ cdn hooks install
 ```bash
 $ cdn hooks status
 
-配置文件: /Users/suchen/.claude/settings.json
+配置文件: ~/.claude/settings.json
   ✓ 已安装 Hooks: PreToolUse, Stop, ...
 
-配置文件: /Users/suchen/.codefuse/engine/cc/settings.json
+配置文件: ~/.claude/settings.json
   ✓ 已安装 Hooks: PreToolUse, Stop, ...
 ```
 
@@ -153,8 +153,8 @@ for p in paths:
 **输出**:
 ```
 找到的配置文件:
-  - /Users/suchen/.claude/settings.json
-  - /Users/suchen/.codefuse/engine/cc/settings.json
+  - ~/.claude/settings.json
+  - ~/.claude/settings.json
 ```
 
 ### 测试 2: 默认配置加载
@@ -176,7 +176,7 @@ for p in config.settings_paths:
 ```
 默认 settings_paths:
   - ~/.claude/settings.json
-  - ~/.codefuse/engine/cc/settings.json
+  - ~/.claude/settings.json
 ```
 
 ### 测试 3: Hooks 操作
@@ -187,7 +187,7 @@ cdn hooks install
 
 # 验证两个配置都被修改
 cat ~/.claude/settings.json | grep "claude-dingtalk"
-cat ~/.codefuse/engine/cc/settings.json | grep "claude-dingtalk"
+cat ~/.claude/settings.json | grep "claude-dingtalk"
 ```
 
 **预期**: 两个文件都包含 claude-dingtalk 的 hooks
@@ -285,11 +285,11 @@ def check_settings_paths_status(self) -> tuple[List[Path], List[str]]:
 $ cdn hooks install
 
 ⚠️  以下配置文件不存在，将跳过:
-  - ~/.codefuse/engine/cc/settings.json
+  - ~/.claude/settings.json
 
 将处理 1 个配置文件
 
-处理配置文件: /Users/suchen/.claude/settings.json
+处理配置文件: ~/.claude/settings.json
   ✓ Hooks 已安装 (备份: settings.json.backup)
 
 ✅ Hooks 安装完成！
@@ -306,9 +306,9 @@ $ cdn hooks install
 $ cdn hooks status
 
 ⚠️  以下配置文件不存在:
-  - ~/.codefuse/engine/cc/settings.json
+  - ~/.claude/settings.json
 
-配置文件: /Users/suchen/.claude/settings.json
+配置文件: ~/.claude/settings.json
   ✓ 已安装 Hooks: ...
 ```
 
@@ -318,11 +318,11 @@ $ cdn hooks status
 $ cdn hooks uninstall
 
 ⚠️  以下配置文件不存在，将跳过:
-  - ~/.codefuse/engine/cc/settings.json
+  - ~/.claude/settings.json
 
 卸载所有配置文件中的 hooks (1 个文件)
 
-处理配置文件: /Users/suchen/.claude/settings.json
+处理配置文件: ~/.claude/settings.json
   ✓ 已删除 10 个 claude-dingtalk hooks (备份: settings.json.backup)
 
 ✅ Hooks 卸载完成！
@@ -344,7 +344,7 @@ $ cdn hooks uninstall
 ```bash
 $ cdn hooks install
 
-处理配置文件: /Users/suchen/.claude/settings.json
+处理配置文件: ~/.claude/settings.json
   ✓ Hooks 已安装
 
 ✅ Hooks 安装完成！
@@ -358,11 +358,11 @@ $ cdn hooks install
 $ cdn hooks install
 
 ⚠️  以下配置文件不存在，将跳过:
-  - ~/.codefuse/engine/cc/settings.json
+  - ~/.claude/settings.json
 
 将处理 1 个配置文件
 
-处理配置文件: /Users/suchen/.claude/settings.json
+处理配置文件: ~/.claude/settings.json
   ✓ Hooks 已安装
 
 ✅ Hooks 安装完成！
@@ -376,7 +376,7 @@ $ cdn hooks install
 
 ### 1. antcc 配置文件
 
-**路径**: `~/.codefuse/engine/cc/settings.json`
+**路径**: `~/.claude/settings.json`
 
 **要求**:
 - ✅ 必须存在（如果不存在，会被过滤掉并提醒）
@@ -394,7 +394,7 @@ $ cdn hooks install
     "PreToolUse": [
       {
         "hooks": [{
-          "command": "/Users/suchen/.claude-dingtalk/hooks/pre_tool_use.py"
+          "command": "~/.claude-dingtalk/hooks/pre_tool_use.py"
         }]
       }
     ]

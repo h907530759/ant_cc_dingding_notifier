@@ -39,7 +39,7 @@
 ```yaml
 settings_paths:
   - ~/.claude/settings.json              # 开源 Claude Code
-  - ~/.codefuse/engine/cc/settings.json  # 内部 antcc 系统
+  - ~/.claude/settings.json  # 内部 antcc 系统
 ```
 
 **文档**: `ANTCC_INTEGRATION.md`
@@ -117,24 +117,24 @@ cdn hooks install
 
 ```bash
 # 1. 临时删除一个配置文件
-mv ~/.codefuse/engine/cc/settings.json ~/.codefuse/engine/cc/settings.json.bak
+mv ~/.claude/settings.json ~/.claude/settings.json.bak
 
 # 2. 安装 hooks
 cdn hooks install
 
 # 3. 预期输出
 ⚠️  以下配置文件不存在，将跳过:
-  - ~/.codefuse/engine/cc/settings.json
+  - ~/.claude/settings.json
 
 将处理 1 个配置文件
 
-处理配置文件: /Users/suchen/.claude/settings.json
+处理配置文件: ~/.claude/settings.json
   ✓ Hooks 已安装
 
 ✅ Hooks 安装完成！
 
 # 4. 恢复文件
-mv ~/.codefuse/engine/cc/settings.json.bak ~/.codefuse/engine/cc/settings.json
+mv ~/.claude/settings.json.bak ~/.claude/settings.json
 ```
 
 #### 测试 2: antcc 集成
@@ -155,7 +155,7 @@ for p in config.settings_paths:
 # 2. 预期输出
 配置的文件:
   - ~/.claude/settings.json
-  - ~/.codefuse/engine/cc/settings.json
+  - ~/.claude/settings.json
 
 # 3. 安装 hooks（应该安装到两个文件）
 cdn hooks install
@@ -168,10 +168,10 @@ cdn hooks install
 cdn hooks status
 
 # 2. 预期输出（如果 antcc 文件存在）
-配置文件: /Users/suchen/.claude/settings.json
+配置文件: ~/.claude/settings.json
   ✓ 已安装 Hooks: ...
 
-配置文件: /Users/suchen/.codefuse/engine/cc/settings.json
+配置文件: ~/.claude/settings.json
   ✓ 已安装 Hooks: ...
 ```
 

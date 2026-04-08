@@ -283,7 +283,7 @@ $ echo $CLAUDE_MACHINE_NAME
 
 ```bash
 ~/.claude/settings.json.backup
-~/.codefuse/engine/cc/settings.json.backup
+~/.claude/settings.json.backup
 ```
 
 这些备份会保留，不会被删除。

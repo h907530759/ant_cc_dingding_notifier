@@ -34,8 +34,8 @@ $ cdn setup
 📂 配置 Claude Code settings.json 路径
 
 发现以下 Claude Code 配置文件:
-  1. /Users/suchen/.claude/settings.json
-  2. /Users/suchen/.codefuse/engine/cc/settings.json
+  1. ~/.claude/settings.json
+  2. ~/.claude/settings.json
 
 是否使用发现的配置文件？[Y/n]:
 ```
@@ -85,7 +85,7 @@ def get_expanded_settings_paths(self) -> List[Path]:
 ```bash
 # 1. 查看 Claude Code 默认 settings 文件
 ls -la ~/.claude/settings.json
-# 输出: -rw-r--r-- 1 suchen  staff  2345 Apr  3 20:12 .claude/settings.json
+# 输出: -rw-r--r-- 1 user  staff  2345 Apr  3 20:12 .claude/settings.json
 
 # 2. 运行 setup（使用默认配置）
 cdn setup
@@ -101,7 +101,7 @@ cat ~/.claude-dingtalk/config.yaml | grep -A 5 "settings_paths"
 settings_paths:
   - ~/.claude/settings.json
   # 或
-  - /Users/suchen/.claude/settings.json
+  - ~/.claude/settings.json
 ```
 
 ### 测试 2: 安装 Hooks
@@ -109,7 +109,7 @@ settings_paths:
 ```bash
 $ cdn hooks install
 
-处理配置文件: /Users/suchen/.claude/settings.json
+处理配置文件: ~/.claude/settings.json
   ✓ Hooks 已安装 (备份: settings.json.backup)
 
 ✅ Hooks 安装完成！
@@ -137,7 +137,7 @@ cdn setup
 
 **用户必须手动输入**：
 ```bash
-/Users/suchen/.claude/settings.json
+~/.claude/settings.json
 ```
 
 **才会创建并修改这个文件**。
@@ -166,7 +166,7 @@ def find_claude_settings():
 
 **发现顺序**：
 1. `~/.claude/settings.json`（主配置）
-2. `~/.codefuse/engine/cc/settings.json`（codefuse 配置）
+2. `~/.claude/settings.json`（codefuse 配置）
 3. 其他常见位置
 
 ---
@@ -190,15 +190,15 @@ def find_claude_settings():
 $ cdn setup
 
 发现以下 Claude Code 配置文件:
-  1. /Users/suchen/.claude/settings.json
-  2. /Users/suchen/.codefuse/engine/cc/settings.json
+  1. ~/.claude/settings.json
+  2. ~/.claude/settings.json
 
 是否使用发现的配置文件？[Y/n]: Y
 ```
 
 **结果**：修改两个文件
 - `~/.claude/settings.json`
-- `~/.codefuse/engine/cc/settings.json`
+- `~/.claude/settings.json`
 
 ### 场景 3: 自定义路径
 
@@ -228,10 +228,10 @@ cat ~/.claude-dingtalk/config.yaml | grep -A 10 "settings_paths"
 ```bash
 $ cdn hooks status
 
-配置文件: /Users/suchen/.claude/settings.json
+配置文件: ~/.claude/settings.json
   ✓ 已安装 Hooks: ...
 
-配置文件: /Users/suchen/.codefuse/engine/cc/settings.json
+配置文件: ~/.claude/settings.json
   ✓ 已安装 Hooks: ...
 ```
 

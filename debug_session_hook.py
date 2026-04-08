@@ -6,7 +6,7 @@ import json
 
 # 根据 Claude Code 官方文档，SessionStart hook 可能提供的数据
 session_start_data = {
-    "cwd": "/Users/suchen/workspace/claude_notifyer"
+    "cwd": "~/workspace/claude_notifyer"
 }
 
 print("=" * 60)

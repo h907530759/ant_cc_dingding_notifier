@@ -56,14 +56,14 @@ cdn hooks status
 ```
 📊 Hooks 状态
 
-配置文件: /Users/suchen/.claude/settings.json
+配置文件: ~/.claude/settings.json
   ✓ 已安装 Hooks:
     - PreToolUse: [{'hooks': [{'type': 'command', 'command': '.../pre_tool_use.py'}]}]
     - Stop: [{'hooks': [{'type': 'command', 'command': '.../stop.py'}]}]
     - SessionEnd: [{'hooks': [{'type': 'command', 'command': '.../session_end.py'}]}]
     ...
 
-配置文件: /Users/suchen/.codefuse/engine/cc/settings.json
+配置文件: ~/.claude/settings.json
   ✓ 已安装 Hooks:
     - PreToolUse: [{'matcher': 'WebSearch', 'hooks': [...]}]
     ...
@@ -107,9 +107,9 @@ $ cdn hooks remove PreToolUse
 
 🗑️  删除 Hook: PreToolUse
 
-处理配置文件: /Users/suchen/.claude/settings.json
+处理配置文件: ~/.claude/settings.json
   ✓ Hook 已删除 (备份: settings.json.backup)
-处理配置文件: /Users/suchen/.codefuse/engine/cc/settings.json
+处理配置文件: ~/.claude/settings.json
   ✓ Hook 已删除 (备份: settings.json.backup)
 
 ✅ 成功从 2 个配置文件中删除 Hook
@@ -333,8 +333,8 @@ settings.json → settings.json.backup
 如果有多个 settings.json 文件，操作会应用到所有文件：
 ```bash
 # 会同时处理:
-# - /Users/suchen/.claude/settings.json
-# - /Users/suchen/.codefuse/engine/cc/settings.json
+# - ~/.claude/settings.json
+# - ~/.claude/settings.json
 ```
 
 ### 3. Hook 脚本与配置分离

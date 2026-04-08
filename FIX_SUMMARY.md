@@ -10,9 +10,9 @@
 Ran 1 stop hook (ctrl+o to expand)
   ⎿  Stop hook error: Failed with non-blocking status code:
   Traceback (most recent call last):
-    File "/Users/suchen/.claude-dingtalk/hooks/stop.py", line 48, in <module>
+    File "~/.claude-dingtalk/hooks/stop.py", line 48, in <module>
       main()
-    File "/Users/suchen/.claude-dingtalk/hooks/stop.py", line 27, in main
+    File "~/.claude-dingtalk/hooks/stop.py", line 27, in main
       config = get_default_config()
   NameError: name 'get_default_config' is not defined
 ```
@@ -111,7 +111,7 @@ except ImportError as e:
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/suchen/.claude-dingtalk/hooks/pre_tool_use.py"
+            "command": "~/.claude-dingtalk/hooks/pre_tool_use.py"
           }
         ]
       }
@@ -128,7 +128,7 @@ $ python3 -c "
 import sys
 from pathlib import Path
 
-package_path = Path('/Users/suchen/workspace/claude_notifyer/src')
+package_path = Path('~/ant_cc_dingding_notifier/src')
 if package_path.exists():
     sys.path.insert(0, str(package_path))
 
@@ -149,7 +149,7 @@ print('✓ EventConfig:', EventConfig)
 ```bash
 $ python3 -c "
 import sys
-exec(open('/Users/suchen/.claude-dingtalk/hooks/stop.py').read())
+exec(open('~/.claude-dingtalk/hooks/stop.py').read())
 print('✓ Hook script loaded successfully!')
 print('✓ main function is callable:', callable(main))
 "
@@ -161,7 +161,7 @@ print('✓ main function is callable:', callable(main))
 
 ### 3. Hooks 重新安装测试
 ```bash
-$ PYTHONPATH=/Users/suchen/workspace/claude_notifyer/src python3 -m claude_dingtalk_notifier.cli hooks install
+$ PYTHONPATH=~/ant_cc_dingding_notifier/src python3 -m claude_dingtalk_notifier.cli hooks install
 
 输出:
 ╔═══════════════════════════════════════════════════════╗
@@ -171,26 +171,26 @@ $ PYTHONPATH=/Users/suchen/workspace/claude_notifyer/src python3 -m claude_dingt
 
 🔧 安装 Claude Code Hooks
 
-处理配置文件: /Users/suchen/.claude/settings.json
+处理配置文件: ~/.claude/settings.json
   ✓ Hooks 已安装 (备份: settings.json.backup)
 
 ✅ Hooks 安装完成！
 
 已安装的 Hooks:
-  - PreToolUse: /Users/suchen/.claude-dingtalk/hooks/pre_tool_use.py
-  - PostToolUse: /Users/suchen/.claude_dingtalk/hooks/post_tool_use.py
-  - PostToolUseFailure: /Users/suchen/.claude-dingtalk/hooks/tool_failure.py
-  - Stop: /Users/suchen/.claude-dingtalk/hooks/stop.py
-  - StopFailure: /Users/suchen/.claude-dingtalk/hooks/stop_failure.py
-  - Notification: /Users/suchen/.claude-dingtalk/hooks/notification.py
-  - SessionEnd: /Users/suchen/.claude_dingtalk/hooks/session_end.py
-  - TaskCreated: /Users/suchen/.claude-dingtalk/hooks/task_created.py
-  - TaskCompleted: /Users/suchen/.claude_dingtalk/hooks/task_completed.py
+  - PreToolUse: ~/.claude-dingtalk/hooks/pre_tool_use.py
+  - PostToolUse: ~/.claude_dingtalk/hooks/post_tool_use.py
+  - PostToolUseFailure: ~/.claude-dingtalk/hooks/tool_failure.py
+  - Stop: ~/.claude-dingtalk/hooks/stop.py
+  - StopFailure: ~/.claude-dingtalk/hooks/stop_failure.py
+  - Notification: ~/.claude-dingtalk/hooks/notification.py
+  - SessionEnd: ~/.claude_dingtalk/hooks/session_end.py
+  - TaskCreated: ~/.claude-dingtalk/hooks/task_created.py
+  - TaskCompleted: ~/.claude_dingtalk/hooks/task_completed.py
 ```
 
 ### 4. Hook 脚本内容验证
 ```bash
-$ cat /Users/suchen/.claude-dingtalk/hooks/stop.py | head -25
+$ cat ~/.claude-dingtalk/hooks/stop.py | head -25
 
 #!/usr/bin/env python3
 """
@@ -202,7 +202,7 @@ import json
 from pathlib import Path
 
 # Add package source to path
-package_path = Path(r"/Users/suchen/workspace/claude_notifyer/src")
+package_path = Path(r"~/ant_cc_dingding_notifier/src")
 if package_path.exists():
     sys.path.insert(0, str(package_path))
 
@@ -259,7 +259,7 @@ Hook 脚本需要正确设置 `sys.path` 以包含包的 `src` 目录：
 
 ```python
 # 正确的做法
-package_path = Path("/Users/suchen/workspace/claude_notifyer/src")
+package_path = Path("~/ant_cc_dingding_notifier/src")
 sys.path.insert(0, str(package_path))
 ```
 
@@ -298,8 +298,8 @@ except (ImportError, AttributeError):
 
 1. **重新安装 Hooks**
    ```bash
-   cd /Users/suchen/workspace/claude_notifyer
-   PYTHONPATH=/Users/suchen/workspace/claude_notifyer/src python3 -m claude_dingtalk_notifier.cli hooks install
+   cd ~/ant_cc_dingding_notifier
+   PYTHONPATH=~/ant_cc_dingding_notifier/src python3 -m claude_dingtalk_notifier.cli hooks install
    ```
 
 2. **验证 Hook 脚本**
@@ -309,7 +309,7 @@ except (ImportError, AttributeError):
 
    # 验证路径是否正确
    grep "package_path" ~/.claude-dingtalk/hooks/stop.py
-   # 应该显示: package_path = Path(r"/Users/suchen/workspace/claude_notifyer/src")
+   # 应该显示: package_path = Path(r"~/ant_cc_dingding_notifier/src")
    ```
 
 3. **测试导入**
@@ -317,7 +317,7 @@ except (ImportError, AttributeError):
    python3 -c "
    import sys
    from pathlib import Path
-   sys.path.insert(0, '/Users/suchen/workspace/claude_notifyer/src')
+   sys.path.insert(0, '~/ant_cc_dingding_notifier/src')
    from claude_dingtalk_notifier.config import get_default_config, EventConfig
    print('✓ Import OK')
    "
@@ -325,7 +325,7 @@ except (ImportError, AttributeError):
 
 4. **测试通知**
    ```bash
-   PYTHONPATH=/Users/suchen/workspace/claude_notifyer/src python3 -m claude_dingtalk_notifier.cli test
+   PYTHONPATH=~/ant_cc_dingding_notifier/src python3 -m claude_dingtalk_notifier.cli test
    ```
 
 ## 后续建议

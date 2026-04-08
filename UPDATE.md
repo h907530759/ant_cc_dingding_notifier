@@ -63,7 +63,7 @@
 
 ```
 发现以下 Claude Code 配置文件:
-  1. /Users/suchen/.claude/settings.json
+  1. ~/.claude/settings.json
 
 是否使用发现的配置文件？ [Y/n]:
 ```
@@ -123,7 +123,7 @@
 ## 🚀 立即体验
 
 ```bash
-cd /Users/suchen/workspace/claude_notifyer
+cd ~/ant_cc_dingding_notifier
 
 # 运行配置向导
 ./run.sh setup

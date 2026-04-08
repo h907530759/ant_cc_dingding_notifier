@@ -158,7 +158,7 @@ When hooks are installed, the correct `stopFailure` hook is added:
 
 - Claude Code Official Hooks (EN): https://code.claude.com/docs/en/hooks
 - Claude Code Official Hooks (中文): https://code.claude.com/docs/zh-CN/hooks
-- Plan Document: `/Users/suchen/.claude/plans/sharded-puzzling-forest.md`
+- Plan Document: `~/.claude/plans/sharded-puzzling-forest.md`
 
 ---
 

@@ -301,7 +301,7 @@ Command failed with exit code 1
 
 1. **拉取最新代码**
    ```bash
-   cd /Users/suchen/workspace/claude_notifyer
+   cd ~/ant_cc_dingding_notifier
    git pull
    ```
 
@@ -379,7 +379,7 @@ Command failed with exit code 1
 
 立即体验新功能：
 ```bash
-cd /Users/suchen/workspace/claude_notifyer
+cd ~/ant_cc_dingding_notifier
 ./run.sh setup
 ```
 

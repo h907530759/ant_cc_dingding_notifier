@@ -24,13 +24,13 @@
 # v0.2.1 之前的体验
 $ cdn hooks install
 
-处理配置文件: /Users/suchen/.claude/settings.json
+处理配置文件: ~/.claude/settings.json
   ✓ Hooks 已安装
 
 ✅ Hooks 安装完成！
 ```
 
-**问题**: 用户不知道还配置了 `~/.codefuse/engine/cc/settings.json`，但这个文件不存在。
+**问题**: 用户不知道还配置了 `~/.claude/settings.json`，但这个文件不存在。
 
 ---
 
@@ -79,7 +79,7 @@ def check_settings_paths_status(self) -> tuple[List[Path], List[str]]:
 ```yaml
 settings_paths:
   - ~/.claude/settings.json              # 存在
-  - ~/.codefuse/engine/cc/settings.json  # 不存在
+  - ~/.claude/settings.json  # 不存在
 ```
 
 #### v0.2.1 的行为
@@ -87,7 +87,7 @@ settings_paths:
 ```bash
 $ cdn hooks install
 
-处理配置文件: /Users/suchen/.claude/settings.json
+处理配置文件: ~/.claude/settings.json
   ✓ Hooks 已安装 (备份: settings.json.backup)
 
 ✅ Hooks 安装完成！
@@ -101,11 +101,11 @@ $ cdn hooks install
 $ cdn hooks install
 
 ⚠️  以下配置文件不存在，将跳过:
-  - ~/.codefuse/engine/cc/settings.json
+  - ~/.claude/settings.json
 
 将处理 1 个配置文件
 
-处理配置文件: /Users/suchen/.claude/settings.json
+处理配置文件: ~/.claude/settings.json
   ✓ Hooks 已安装 (备份: settings.json.backup)
 
 ✅ Hooks 安装完成！
@@ -121,9 +121,9 @@ $ cdn hooks install
 $ cdn hooks status
 
 ⚠️  以下配置文件不存在:
-  - ~/.codefuse/engine/cc/settings.json
+  - ~/.claude/settings.json
 
-配置文件: /Users/suchen/.claude/settings.json
+配置文件: ~/.claude/settings.json
   ✓ 已安装 Hooks:
     - PreToolUse
     - Stop
@@ -139,11 +139,11 @@ $ cdn hooks status
 $ cdn hooks uninstall --all
 
 ⚠️  以下配置文件不存在，将跳过:
-  - ~/.codefuse/engine/cc/settings.json
+  - ~/.claude/settings.json
 
 卸载所有配置文件中的 hooks (1 个文件)
 
-处理配置文件: /Users/suchen/.claude/settings.json
+处理配置文件: ~/.claude/settings.json
   ✓ 已删除 10 个 claude-dingtalk hooks (备份: settings.json.backup)
 
 ✅ Hooks 卸载完成！
@@ -159,11 +159,11 @@ $ cdn hooks remove PreToolUse --all
 🗑️  删除 Hook: PreToolUse
 
 ⚠️  以下配置文件不存在，将跳过:
-  - ~/.codefuse/engine/cc/settings.json
+  - ~/.claude/settings.json
 
 从所有配置文件中删除 (1 个文件)
 
-处理配置文件: /Users/suchen/.claude/settings.json
+处理配置文件: ~/.claude/settings.json
   ✓ 已删除 PreToolUse hook (备份: settings.json.backup)
 
 ✅ Hook 删除完成！
@@ -199,7 +199,7 @@ settings_paths:
 $ cdn hooks install
 
 ⚠️  以下配置文件不存在，将跳过:
-  - ~/.codefuse/engine/cc/settings.json
+  - ~/.claude/settings.json
 
 将处理 1 个配置文件
 
@@ -222,10 +222,10 @@ $ cdn hooks install
 
 将处理 2 个配置文件  # 没有警告，说明两个文件都存在
 
-处理配置文件: /Users/suchen/.claude/settings.json
+处理配置文件: ~/.claude/settings.json
   ✓ Hooks 已安装
 
-处理配置文件: /Users/suchen/.codefuse/engine/cc/settings.json
+处理配置文件: ~/.claude/settings.json
   ✓ Hooks 已安装
 
 ✅ Hooks 安装完成！
@@ -234,7 +234,7 @@ $ cdn hooks install
 **如果看到警告**:
 ```bash
 ⚠️  以下配置文件不存在，将跳过:
-  - ~/.codefuse/engine/cc/settings.json
+  - ~/.claude/settings.json
 ```
 
 **可能原因**:
@@ -366,17 +366,17 @@ cdn hooks install
 
 ```bash
 # 1. 临时删除一个文件
-mv ~/.codefuse/engine/cc/settings.json ~/.codefuse/engine/cc/settings.json.bak
+mv ~/.claude/settings.json ~/.claude/settings.json.bak
 
 # 2. 安装 hooks
 cdn hooks install
 
 # 3. 验证：应该显示警告
 # ⚠️  以下配置文件不存在，将跳过:
-#   - ~/.codefuse/engine/cc/settings.json
+#   - ~/.claude/settings.json
 
 # 4. 恢复文件
-mv ~/.codefuse/engine/cc/settings.json.bak ~/.codefuse/engine/cc/settings.json
+mv ~/.claude/settings.json.bak ~/.claude/settings.json
 ```
 
 ### 测试 3: 所有文件都不存在
@@ -384,7 +384,7 @@ mv ~/.codefuse/engine/cc/settings.json.bak ~/.codefuse/engine/cc/settings.json
 ```bash
 # 1. 临时删除所有配置文件
 mv ~/.claude/settings.json ~/.claude/settings.json.bak
-mv ~/.codefuse/engine/cc/settings.json ~/.codefuse/engine/cc/settings.json.bak
+mv ~/.claude/settings.json ~/.claude/settings.json.bak
 
 # 2. 安装 hooks
 cdn hooks install
@@ -392,14 +392,14 @@ cdn hooks install
 # 3. 验证：应该显示
 # ⚠️  以下配置文件不存在，将跳过:
 #   - ~/.claude/settings.json
-#   - ~/.codefuse/engine/cc/settings.json
+#   - ~/.claude/settings.json
 #
 # ⚠ 未找到有效的 settings.json 文件
 # 请先运行 setup 命令配置文件路径
 
 # 4. 恢复文件
 mv ~/.claude/settings.json.bak ~/.claude/settings.json
-mv ~/.codefuse/engine/cc/settings.json.bak ~/.codefuse/engine/cc/settings.json
+mv ~/.claude/settings.json.bak ~/.claude/settings.json
 ```
 
 ---

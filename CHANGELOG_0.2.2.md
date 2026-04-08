@@ -24,7 +24,7 @@ v0.2.1:
 
 v0.2.2:
   ⚠️  以下配置文件不存在，将跳过:
-    - ~/.codefuse/engine/cc/settings.json
+    - ~/.claude/settings.json
   将处理 1 个配置文件 ✅
 ```
 

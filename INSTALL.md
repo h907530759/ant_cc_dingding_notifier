@@ -8,7 +8,7 @@
 
 ```bash
 # 进入项目目录
-cd /Users/suchen/workspace/claude_notifyer
+cd ~/ant_cc_dingding_notifier
 
 # 使用 run.sh 运行所有命令
 ./run.sh setup
@@ -21,8 +21,8 @@ cd /Users/suchen/workspace/claude_notifyer
 
 ```bash
 # 添加别名
-alias claude-dingtalk='/Users/suchen/workspace/claude_notifyer/run.sh'
-alias cdn='/Users/suchen/workspace/claude_notifyer/run.sh'
+alias claude-dingtalk='~/ant_cc_dingding_notifier/run.sh'
+alias cdn='~/ant_cc_dingding_notifier/run.sh'
 
 # 使用别名
 claude-dingtalk setup
@@ -32,7 +32,7 @@ cdn test
 ## 方式二：使用安装脚本
 
 ```bash
-cd /Users/suchen/workspace/claude_notifyer
+cd ~/ant_cc_dingding_notifier
 chmod +x install.sh
 ./install.sh
 ```
@@ -71,7 +71,7 @@ python3 -m pip install --user pipx
 python3 -m pipx ensurepath
 
 # 使用 pipx 安装
-cd /Users/suchen/workspace/claude_notifyer
+cd ~/ant_cc_dingding_notifier
 pipx install .
 ```
 

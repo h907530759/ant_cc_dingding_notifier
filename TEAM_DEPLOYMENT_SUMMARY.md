@@ -20,7 +20,7 @@ $ ./install.sh
 ║     Team Deployment Installer                         ║
 ╚═══════════════════════════════════════════════════════╝
 
-ℹ 项目路径: /Users/suchen/workspace/claude_notifyer
+ℹ 项目路径: ~/ant_cc_dingding_notifier
 ✓ Python 版本: 3.9.6
 ✓ 依赖安装完成
 ✓ 创建: ~/.local/bin/cdn

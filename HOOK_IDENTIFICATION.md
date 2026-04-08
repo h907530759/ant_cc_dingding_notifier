@@ -18,14 +18,14 @@
         "matcher": "WebSearch",
         "hooks": [{
           "type": "command",
-          "command": "/Users/suchen/.codefuse/fuse/engine/hooks/mac-arm64/cfuse-hook-cli cc_PreToolUse",
+          "command": "~/.codefuse/fuse/engine/hooks/mac-arm64/cfuse-hook-cli cc_PreToolUse",
           "timeout": 30
         }]
       },
       {
         "hooks": [{
           "type": "command",
-          "command": "/Users/suchen/.claude-dingtalk/hooks/pre_tool_use.py"
+          "command": "~/.claude-dingtalk/hooks/pre_tool_use.py"
         }]
       }
     ]
@@ -45,8 +45,8 @@
 
 | 程序 | 路径特征 | 唯一标识 |
 |------|---------|---------|
-| **claude-dingtalk** | `/Users/suchen/.claude-dingtalk/hooks/` | ✅ `.claude-dingtalk/hooks/` |
-| **codefuse** | `/Users/suchen/.codefuse/fuse/engine/hooks/` | ✅ `.codefuse/fuse/` |
+| **claude-dingtalk** | `~/.claude-dingtalk/hooks/` | ✅ `.claude-dingtalk/hooks/` |
+| **codefuse** | `~/.codefuse/fuse/engine/hooks/` | ✅ `.codefuse/fuse/` |
 | **其他工具** | 通常是 `/usr/local/bin/` 或其他 | 各不相同 |
 
 ### 识别代码
@@ -128,7 +128,7 @@ if "claude" in command:
 
 ```bash
 # 查看 PreToolUse 的所有配置
-cat ~/.codefuse/engine/cc/settings.json | python3 -m json.tool | grep -A 10 "PreToolUse"
+cat ~/.claude/settings.json | python3 -m json.tool | grep -A 10 "PreToolUse"
 ```
 
 **结果**：
@@ -136,12 +136,12 @@ cat ~/.codefuse/engine/cc/settings.json | python3 -m json.tool | grep -A 10 "Pre
 "PreToolUse": [
   {
     "hooks": [{
-      "command": "/Users/suchen/.codefuse/fuse/engine/hooks/.../cfuse-hook-cli cc_PreToolUse"
+      "command": "~/.codefuse/fuse/engine/hooks/.../cfuse-hook-cli cc_PreToolUse"
     }]
   },
   {
     "hooks": [{
-      "command": "/Users/suchen/.claude-dingtalk/hooks/pre_tool_use.py"
+      "command": "~/.claude-dingtalk/hooks/pre_tool_use.py"
     }]
   }
 ]
@@ -158,7 +158,7 @@ cat ~/.codefuse/engine/cc/settings.json | python3 -m json.tool | grep -A 10 "Pre
 cdn hooks remove PreToolUse
 
 # 查看结果
-cat ~/.codefuse/engine/cc/settings.json | python3 -m json.tool | grep -A 10 "PreToolUse"
+cat ~/.claude/settings.json | python3 -m json.tool | grep -A 10 "PreToolUse"
 ```
 
 **预期结果**：
@@ -168,7 +168,7 @@ cat ~/.codefuse/engine/cc/settings.json | python3 -m json.tool | grep -A 10 "Pre
     "matcher": "WebSearch",
     "hooks": [{
       "type": "command",
-      "command": "/Users/suchen/.codefuse/fuse/engine/hooks/.../cfuse-hook-cli cc_PreToolUse"
+      "command": "~/.codefuse/fuse/engine/hooks/.../cfuse-hook-cli cc_PreToolUse"
     }]
   }
 ]

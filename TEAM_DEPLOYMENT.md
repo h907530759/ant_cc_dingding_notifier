@@ -11,7 +11,7 @@
 ### 问题 1: 项目路径硬编码
 ```bash
 # ❌ 当前的 wrapper 脚本
-export PYTHONPATH="/Users/suchen/workspace/claude_notifyer/src:$PYTHONPATH"
+export PYTHONPATH="~/ant_cc_dingding_notifier/src:$PYTHONPATH"
 ```
 每个人克隆项目的路径不同，导致无法复用。
 

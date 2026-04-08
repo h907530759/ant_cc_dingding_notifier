@@ -6,8 +6,8 @@
 
 ```bash
 # 克隆仓库
-git clone https://github.com/suchen/claude-dingtalk-notifier.git
-cd claude-dingtalk-notifier
+git clone https://github.com/h907530759/ant_cc_dingding_notifier.git
+cd ant_cc_dingding_notifier
 
 # 运行安装脚本
 chmod +x install.sh
@@ -18,8 +18,8 @@ chmod +x install.sh
 
 ```bash
 # 克隆仓库
-git clone https://github.com/suchen/claude-dingtalk-notifier.git
-cd claude-dingtalk-notifier
+git clone https://github.com/h907530759/ant_cc_dingding_notifier.git
+cd ant_cc_dingding_notifier
 
 # 安装依赖
 pip install -r requirements.txt

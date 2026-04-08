@@ -34,7 +34,7 @@
 
 # 示例
 ~/.claude/settings.json → ~/.claude/settings.json.backup
-~/.codefuse/engine/cc/settings.json → ~/.codefuse/engine/cc/settings.json.backup
+~/.claude/settings.json → ~/.claude/settings.json.backup
 ```
 
 ### 操作流程

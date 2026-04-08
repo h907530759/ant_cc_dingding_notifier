@@ -334,7 +334,7 @@ grep -A 3 "macos_notifier.send" ~/.claude-dingtalk/hooks/session_start.py
 
 ```bash
 # 手动运行 hook 脚本，查看错误
-echo '{"cwd":"/Users/suchen/test"}' | python3 ~/.claude-dingtalk/hooks/session_start.py
+echo '{"cwd":"~/test"}' | python3 ~/.claude-dingtalk/hooks/session_start.py
 
 # 检查是否有错误输出
 # 如果有 ImportError，说明 Python 路径配置有问题
@@ -411,7 +411,7 @@ cat ~/.claude-dingtalk/config.yaml
 cdn hooks status
 
 # 4. 手动测试
-echo '{"cwd":"/Users/suchen/test"}' | python3 ~/.claude-dingtalk/hooks/session_start.py 2>&1
+echo '{"cwd":"~/test"}' | python3 ~/.claude-dingtalk/hooks/session_start.py 2>&1
 
 # 5. 系统通知测试
 osascript -e 'display notification "测试" with title "测试"'

@@ -34,7 +34,7 @@
 ```markdown
 ### 🚀 新会话已启动
 
-📂 项目: /Users/suchen/workspace/claude_notifyer
+📂 项目: ~/ant_cc_dingding_notifier
 ⏰ 开始时间: 2026-04-04 23:45:00
 💡 让我们开始工作吧！
 ```

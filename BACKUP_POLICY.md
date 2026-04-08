@@ -16,7 +16,7 @@
 
 **示例**：
 - `~/.claude/settings.json` → `~/.claude/settings.json.backup`
-- `/Users/suchen/.codefuse/engine/cc/settings.json` → `/Users/suchen/.codefuse/engine/cc/settings.json.backup`
+- `~/.claude/settings.json` → `~/.claude/settings.json.backup`
 
 ### 备份时机
 
@@ -66,7 +66,7 @@ settings.json.backup  # 包含第2次操作前的状态（覆盖第1次）
 
 ```bash
 ~/.claude/settings.json.backup
-~/.codefuse/engine/cc/settings.json.backup
+~/.claude/settings.json.backup
 /path/to/other/settings.json.backup
 ```
 
@@ -88,8 +88,8 @@ settings.json.backup  # 包含第2次操作前的状态（覆盖第1次）
 备份文件与原文件在同一目录：
 
 ```bash
-原文件: /Users/suchen/.claude/settings.json
-备份文件: /Users/suchen/.claude/settings.json.backup
+原文件: ~/.claude/settings.json
+备份文件: ~/.claude/settings.json.backup
 ```
 
 ---
@@ -101,7 +101,7 @@ settings.json.backup  # 包含第2次操作前的状态（覆盖第1次）
 ```bash
 # 查看所有备份
 ls -la ~/.claude/settings.json.backup
-ls -la ~/.codefuse/engine/cc/settings.json.backup
+ls -la ~/.claude/settings.json.backup
 
 # 恢复备份
 cp ~/.claude/settings.json.backup ~/.claude/settings.json
@@ -225,7 +225,7 @@ cp ~/.claude/settings.json.pre-operation ~/.claude/settings.json
 ```bash
 $ cdn hooks install
 
-处理配置文件: /Users/suchen/.claude/settings.json
+处理配置文件: ~/.claude/settings.json
   ✓ Hooks 已安装 (备份: settings.json.backup)
 
 ✅ Hooks 安装完成！
@@ -238,7 +238,7 @@ $ cdn hooks install
 ```bash
 $ cdn hooks remove PreToolUse
 
-处理配置文件: /Users/suchen/.claude/settings.json
+处理配置文件: ~/.claude/settings.json
   ✓ Hook 已删除 (备份: settings.json.backup)
 ```
 
@@ -249,7 +249,7 @@ $ cdn hooks remove PreToolUse
 ```bash
 $ cdn hooks uninstall
 
-处理配置文件: /Users/suchen/.claude/settings.json
+处理配置文件: ~/.claude/settings.json
   ✓ 已删除 7 个 claude-dingtalk hooks (备份: settings.json.backup)
 ```
 

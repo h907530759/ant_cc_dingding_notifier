@@ -81,7 +81,8 @@ claude-dingtalk-notifier/
 ### 安装
 
 ```bash
-cd /Users/suchen/workspace/claude_notifyer
+git clone https://github.com/h907530759/ant_cc_dingding_notifier.git
+cd ant_cc_dingding_notifier
 chmod +x install.sh
 ./install.sh
 ```
@@ -300,7 +301,7 @@ sensitive_operations:
 
 ---
 
-**项目位置:** `/Users/suchen/workspace/claude_notifyer`
+**项目位置:** https://github.com/h907530759/ant_cc_dingding_notifier
 
 **版本:** v0.1.0
 

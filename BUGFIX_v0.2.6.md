@@ -14,7 +14,7 @@
 ```
 🚀 新会话已启动
 
-📂 项目: /Users/suchen/workspace/claude_notifyer
+📂 项目: ~/ant_cc_dingding_notifier
 📝 会话名称: Unknown  ← Bug
 🆔 会话ID: Unknown     ← Bug
 ⏰ 开始时间: 2026-04-04 23:43:55
@@ -160,7 +160,7 @@ cdn hooks status
 🚀 会话已启动 - Unknown  ← session_name 是 "Unknown"
 
 ### 🚀 新会话已启动
-📂 项目: /Users/suchen/workspace/claude_notifyer
+📂 项目: ~/ant_cc_dingding_notifier
 📝 会话名称: Unknown  ← Bug
 🆔 会话ID: Unknown     ← Bug
 ⏰ 开始时间: 2026-04-04 23:43:55
@@ -172,7 +172,7 @@ cdn hooks status
 🚀 会话已启动
 
 ### 🚀 新会话已启动
-📂 项目: /Users/suchen/workspace/claude_notifyer
+📂 项目: ~/ant_cc_dingding_notifier
 ⏰ 开始时间: 2026-04-04 23:45:00
 💡 让我们开始工作吧！
 ```
@@ -186,7 +186,7 @@ cdn hooks status
 👋 会话已结束 - Unknown  ← session_name 是 "Unknown"
 
 ### 👋 会话已结束
-📂 项目: /Users/suchen/workspace/claude_notifyer
+📂 项目: ~/ant_cc_dingding_notifier
 📝 会话名称: Unknown  ← Bug
 🆔 会话ID: Unknown     ← Bug
 ⏰ 结束时间: 2026-04-04 23:45:00
@@ -198,7 +198,7 @@ cdn hooks status
 👋 会话已结束
 
 ### 👋 会话已结束
-📂 项目: /Users/suchen/workspace/claude_notifyer
+📂 项目: ~/ant_cc_dingding_notifier
 ⏰ 结束时间: 2026-04-04 23:45:00
 👋 感谢使用，再见！
 ```

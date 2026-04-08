@@ -192,7 +192,7 @@ cdn hooks remove X   # → settings.json.backup
 ```bash
 # 备份文件与原文件在同一目录
 ~/.claude/settings.json → ~/.claude/settings.json.backup
-~/.codefuse/engine/cc/settings.json → ~/.codefuse/engine/cc/settings.json.backup
+~/.claude/settings.json → ~/.claude/settings.json.backup
 ```
 
 ### 恢复备份

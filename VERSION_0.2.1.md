@@ -88,7 +88,7 @@ except ImportError:
 **修复代码**:
 ```python
 # 正确的路径设置（指向 src 目录）
-package_path = Path(r"/Users/suchen/workspace/claude_notifyer/src")
+package_path = Path(r"~/ant_cc_dingding_notifier/src")
 if package_path.exists():
     sys.path.insert(0, str(package_path))
 
@@ -234,7 +234,7 @@ elif event_type == "stop_failure":
 
 1. **拉取最新代码**
    ```bash
-   cd /Users/suchen/workspace/claude_notifyer
+   cd ~/ant_cc_dingding_notifier
    git pull
    ```
 
@@ -321,7 +321,7 @@ events:
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/suchen/.claude-dingtalk/hooks/pre_tool_use.py"
+            "command": "~/.claude-dingtalk/hooks/pre_tool_use.py"
           }
         ]
       }
@@ -331,7 +331,7 @@ events:
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/suchen/.claude-dingtalk/hooks/post_tool_use.py"
+            "command": "~/.claude-dingtalk/hooks/post_tool_use.py"
           }
         ]
       }
@@ -341,7 +341,7 @@ events:
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/suchen/.claude-dingtalk/hooks/tool_failure.py"
+            "command": "~/.claude-dingtalk/hooks/tool_failure.py"
           }
         ]
       }
@@ -351,7 +351,7 @@ events:
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/suchen/.claude-dingtalk/hooks/stop.py"
+            "command": "~/.claude-dingtalk/hooks/stop.py"
           }
         ]
       }
@@ -361,7 +361,7 @@ events:
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/suchen/.claude-dingtalk/hooks/stop_failure.py"
+            "command": "~/.claude-dingtalk/hooks/stop_failure.py"
           }
         ]
       }
@@ -371,7 +371,7 @@ events:
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/suchen/.claude-dingtalk/hooks/session_start.py"
+            "command": "~/.claude-dingtalk/hooks/session_start.py"
           }
         ]
       }
@@ -381,7 +381,7 @@ events:
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/suchen/.claude-dingtalk/hooks/session_end.py"
+            "command": "~/.claude-dingtalk/hooks/session_end.py"
           }
         ]
       }
@@ -391,7 +391,7 @@ events:
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/suchen/.claude-dingtalk/hooks/task_created.py"
+            "command": "~/.claude-dingtalk/hooks/task_created.py"
           }
         ]
       }
@@ -401,7 +401,7 @@ events:
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/suchen/.claude-dingtalk/hooks/task_completed.py"
+            "command": "~/.claude-dingtalk/hooks/task_completed.py"
           }
         ]
       }
@@ -411,7 +411,7 @@ events:
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/suchen/.claude-dingtalk/hooks/cwd_changed.py"
+            "command": "~/.claude-dingtalk/hooks/cwd_changed.py"
           }
         ]
       }
@@ -421,7 +421,7 @@ events:
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/suchen/.claude-dingtalk/hooks/config_change.py"
+            "command": "~/.claude-dingtalk/hooks/config_change.py"
           }
         ]
       }
@@ -431,7 +431,7 @@ events:
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/suchen/.claude-dingtalk/hooks/subagent_start.py"
+            "command": "~/.claude-dingtalk/hooks/subagent_start.py"
           }
         ]
       }
@@ -441,7 +441,7 @@ events:
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/suchen/.claude-dingtalk/hooks/subagent_stop.py"
+            "command": "~/.claude-dingtalk/hooks/subagent_stop.py"
           }
         ]
       }
