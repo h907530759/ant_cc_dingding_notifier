@@ -63,7 +63,12 @@ git pull origin main
 source ~/.zshrc  # 或 source ~/.bashrc
 
 # 5. 重新安装 Hooks（重要！）
+# 方式一：快速升级（推荐）
 claude-dingtalk hooks install
+
+# 方式二：彻底升级（如果遇到问题）
+# claude-dingtalk hooks uninstall
+# claude-dingtalk hooks install
 
 # 6. 测试新功能
 claude-dingtalk hooks logs -n 10
