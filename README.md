@@ -45,6 +45,32 @@ claude-dingtalk setup
 
 详细安装说明请查看 [INSTALL.md](INSTALL.md)
 
+### 🔄 如何更新升级
+
+如果你已经安装了旧版本，只需：
+
+```bash
+# 1. 进入项目目录
+cd ~/workspace/claude_notifyer  # 或你的项目路径
+
+# 2. 拉取最新代码
+git pull origin main
+
+# 3. 重新安装
+./install.sh
+
+# 4. 重新加载 shell 配置
+source ~/.zshrc  # 或 source ~/.bashrc
+
+# 5. 重新安装 Hooks（重要！）
+claude-dingtalk hooks install
+
+# 6. 测试新功能
+claude-dingtalk hooks logs -n 10
+```
+
+详细升级说明请查看 [UPGRADE_GUIDE.md](UPGRADE_GUIDE.md)
+
 ## 📚 文档
 
 - **[INSTALL.md](INSTALL.md)** - 安装指南
