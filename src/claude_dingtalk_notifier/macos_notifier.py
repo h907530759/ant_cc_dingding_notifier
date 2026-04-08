@@ -64,7 +64,8 @@ class MacOSNotifier:
                 "terminal-notifier",
                 "-title", title,
                 "-message", message,
-                "-sender", "com.apple.Terminal"  # 指定发送者
+                "-sender", "com.apple.Terminal",  # 指定发送者
+                "-activate", "com.apple.Terminal"  # 激活应用以显示通知
             ]
 
             # 添加声音选项
