@@ -13,40 +13,71 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 try:
     from claude_dingtalk_notifier.config import get_default_config
-    from claude_dingtalk_notifier.dingtalk import DingTalkNotifier, format_claude_message
+    from claude_dingtalk_notifier.dingtalk import DingTalkNotifier, format_claude_message, DingTalkMessage
+    from claude_dingtalk_notifier.logger import get_logger
     from claude_dingtalk_notifier.config import EventConfig
-except ImportError:
-    # Fallback for development
-    pass
+except ImportError as e:
+    # Import error - print warning and exit
+    print(f"Warning: Could not import claude_dingtalk_notifier: {e}", file=sys.stderr)
+    sys.exit(0)
 
 
 def main():
     """Main hook function"""
-    # Get project name
-    project = str(Path.cwd().name)
+    hook_name = "stop"
 
-    # Load config
-    config = get_default_config()
+    # Initialize logger
+    logger = get_logger()
+    logger.log_hook_start(hook_name)
 
-    # Check if enabled
-    stop_event = config.events.get("stop")
-    if not config.dingtalk.enabled or not stop_event or not stop_event.enabled:
-        return
+    try:
+        # Get project name
+        project = str(Path.cwd().name)
 
-    # Send completion notification
-    notifier = DingTalkNotifier(
-        webhook=config.dingtalk.webhook,
-        secret=config.dingtalk.secret
-    )
+        # Load config
+        config = get_default_config()
 
-    message_data = {
-        "project": project,
-        "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    }
+        # Check if enabled
+        stop_event = config.events.get("stop")
+        if not config.dingtalk.enabled or not stop_event or not stop_event.enabled:
+            logger.debug(f"{hook_name} hook is disabled")
+            return
 
-    message = format_claude_message("stop", message_data)
-    if message:
-        notifier.send(message)
+        # Send completion notification
+        notifier = DingTalkNotifier(
+            webhook=config.dingtalk.webhook,
+            secret=config.dingtalk.secret,
+            logger=logger
+        )
+
+        message_data = {
+            "project": project,
+            "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        }
+
+        message = format_claude_message("stop", message_data)
+        if message:
+            result = notifier.send(DingTalkMessage(
+                title="Claude Code 任务完成",
+                text=message,
+                msg_type="markdown"
+            ))
+
+            if result.get("success"):
+                logger.log_hook_success(hook_name, "Notification sent successfully")
+            else:
+                logger.log_hook_error(
+                    hook_name,
+                    Exception(result.get("error", "Unknown error")),
+                    "Failed to send notification"
+                )
+        else:
+            logger.warning(f"Failed to format message for {hook_name} hook")
+
+    except Exception as e:
+        logger.log_hook_error(hook_name, e, "Unexpected error in hook execution")
+        # Don't raise - hook failures shouldn't break Claude Code
+        sys.exit(0)
 
 
 if __name__ == "__main__":

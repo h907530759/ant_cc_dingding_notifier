@@ -23,16 +23,18 @@ class DingTalkMessage:
 class DingTalkNotifier:
     """DingTalk robot notification handler"""
 
-    def __init__(self, webhook: str, secret: str = ""):
+    def __init__(self, webhook: str, secret: str = "", logger=None):
         """
         Initialize DingTalk notifier
 
         Args:
             webhook: DingTalk robot webhook URL
             secret: DingTalk robot secret (optional, for signature verification)
+            logger: Optional logger instance for logging
         """
         self.webhook = webhook
         self.secret = secret
+        self.logger = logger
 
     def _generate_sign(self, timestamp: int) -> str:
         """Generate signature for DingTalk webhook"""
@@ -116,8 +118,20 @@ class DingTalkNotifier:
             result = response.json()
 
             if result.get("errcode") == 0:
+                if self.logger:
+                    self.logger.log_dingtalk_response(
+                        success=True,
+                        status_code=response.status_code,
+                        response=result
+                    )
                 return {"success": True, "data": result}
             else:
+                if self.logger:
+                    self.logger.log_dingtalk_response(
+                        success=False,
+                        status_code=response.status_code,
+                        response=result
+                    )
                 return {
                     "success": False,
                     "error": result.get("errmsg", "Unknown error"),
@@ -125,10 +139,16 @@ class DingTalkNotifier:
                 }
 
         except requests.exceptions.Timeout:
+            if self.logger:
+                self.logger.error("DingTalk request timeout")
             return {"success": False, "error": "Request timeout"}
         except requests.exceptions.RequestException as e:
+            if self.logger:
+                self.logger.error(f"DingTalk request failed: {str(e)}")
             return {"success": False, "error": str(e)}
         except Exception as e:
+            if self.logger:
+                self.logger.error(f"DingTalk unexpected error: {str(e)}")
             return {"success": False, "error": str(e)}
 
     def send_markdown(self, title: str, text: str) -> Dict[str, Any]:

@@ -572,8 +572,9 @@ if package_path.exists():
 
 try:
     from claude_dingtalk_notifier.config import get_default_config, EventConfig
-    from claude_dingtalk_notifier.dingtalk import DingTalkNotifier, format_claude_message
+    from claude_dingtalk_notifier.dingtalk import DingTalkNotifier, format_claude_message, DingTalkMessage
     from claude_dingtalk_notifier.macos_notifier import MacOSNotifier
+    from claude_dingtalk_notifier.logger import get_logger
 except ImportError as e:
     # If import fails, exit gracefully to avoid breaking Claude Code
     print(f"Warning: Could not import claude_dingtalk_notifier: {{e}}", file=sys.stderr)
@@ -725,48 +726,71 @@ if __name__ == "__main__":
     stop_hook = common_header + '''from datetime import datetime
 
 def main():
-    # Read input from stdin (Stop hook may provide data)
+    hook_name = "stop"
+
+    # Initialize logger
+    logger = get_logger()
+    logger.log_hook_start(hook_name)
+
     try:
-        input_data = json.load(sys.stdin)
-        project = input_data.get("cwd", "Unknown")
-    except:
-        # If no stdin data, use current directory
-        project = str(Path.cwd().name)
+        # Read input from stdin (Stop hook may provide data)
+        try:
+            input_data = json.load(sys.stdin)
+            project = input_data.get("cwd", "Unknown")
+        except:
+            # If no stdin data, use current directory
+            project = str(Path.cwd().name)
 
-    # Load config
-    config = get_default_config()
+        # Load config
+        config = get_default_config()
 
-    event_config = config.events.get("stop", EventConfig())
-    if not event_config.enabled:
-        return
+        event_config = config.events.get("stop", EventConfig())
+        if not event_config.enabled:
+            logger.debug(f"{hook_name} hook is disabled")
+            return
 
-    # Send DingTalk notification
-    if config.dingtalk.enabled:
-        notifier = DingTalkNotifier(
-            webhook=config.dingtalk.webhook,
-            secret=config.dingtalk.secret
-        )
+        # Send DingTalk notification
+        if config.dingtalk.enabled:
+            notifier = DingTalkNotifier(
+                webhook=config.dingtalk.webhook,
+                secret=config.dingtalk.secret,
+                logger=logger
+            )
 
-        message_data = {
-            "project": project,
-            "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        }
+            message_data = {
+                "project": project,
+                "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            }
 
-        message = format_claude_message("stop", message_data)
-        if message:
-            notifier.send(message)
+            message = format_claude_message("stop", message_data)
+            if message:
+                result = notifier.send(message)
 
-    # Send macOS notification
-    if config.macos.enabled:
-        macos_notifier = MacOSNotifier(
-            enabled=config.macos.enabled,
-            sound=config.macos.sound
-        )
-        project_name = Path(project).name if project != "Unknown" else project
-        macos_notifier.send(
-            title=f"{project_name} - 任务完成",
-            message="所有任务已完成"
-        )
+                if result.get("success"):
+                    logger.log_hook_success(hook_name, "Notification sent successfully")
+                else:
+                    logger.log_hook_error(
+                        hook_name,
+                        Exception(result.get("error", "Unknown error")),
+                        "Failed to send notification"
+                    )
+
+        # Send macOS notification
+        if config.macos.enabled:
+            macos_notifier = MacOSNotifier(
+                enabled=config.macos.enabled,
+                sound=config.macos.sound
+            )
+            project_name = Path(project).name if project != "Unknown" else project
+            macos_notifier.send(
+                title=f"{project_name} - 任务完成",
+                message="所有任务已完成"
+            )
+
+    except Exception as e:
+        logger.log_hook_error(hook_name, e, "Unexpected error in hook execution")
+        # Don't raise - hook failures shouldn't break Claude Code
+        sys.exit(0)
 
 if __name__ == "__main__":
     main()
@@ -1578,6 +1602,61 @@ def hooks_status():
         else:
             rprint("  [dim]−[/dim] 未安装 Hooks")
         rprint("")
+
+
+@hooks.command('logs')
+@click.option('--lines', '-n', default=50, help='显示最后 N 行日志')
+@click.option('--follow', '-f', is_flag=True, help='实时跟踪日志')
+@click.option('--all', '-a', is_flag=True, help='显示所有日志')
+def hooks_logs(lines, follow, all):
+    """查看 Hook 执行日志"""
+    import subprocess
+
+    config = get_default_config()
+    log_file = config.config_dir / "hook.log"
+
+    if not log_file.exists():
+        rprint("[yellow]⚠[/yellow] 日志文件不存在")
+        rprint(f"[dim]日志路径: {log_file}[/dim]")
+        return
+
+    rprint(f"[bold cyan]📋 Hook 执行日志[/bold cyan]\n")
+    rprint(f"[dim]日志文件: {log_file}[/dim]\n")
+
+    if follow:
+        # Follow mode (like tail -f)
+        rprint("[bold green]实时跟踪模式 (Ctrl+C 退出)[/bold green]\n")
+        try:
+            # Use tail -f command
+            subprocess.run(['tail', '-f', str(log_file)], check=False)
+        except KeyboardInterrupt:
+            rprint("\n\n[dim]已停止跟踪日志[/dim]")
+    elif all:
+        # Show all logs
+        try:
+            with open(log_file, 'r', encoding='utf-8') as f:
+                content = f.read()
+                if content:
+                    rprint(content)
+                else:
+                    rprint("[dim]日志文件为空[/dim]")
+        except Exception as e:
+            rprint(f"[red]✗[/red] 读取日志失败: {e}")
+    else:
+        # Show last N lines
+        try:
+            result = subprocess.run(
+                ['tail', '-n', str(lines), str(log_file)],
+                capture_output=True,
+                text=True,
+                check=False
+            )
+            if result.stdout:
+                rprint(result.stdout)
+            else:
+                rprint("[dim]日志文件为空[/dim]")
+        except Exception as e:
+            rprint(f"[red]✗[/red] 读取日志失败: {e}")
 
 
 if __name__ == "__main__":
